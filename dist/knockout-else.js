@@ -1,5 +1,5 @@
 /*!
-  Knockout Else v1.0.11 (2014-10-14T19:25:00.243Z)
+  Knockout Else v1.0.11-plug-leaks (2015-12-06T03:07:17.763Z)
   By: Brian M Hunt (C) 2014
   License: MIT
 */
@@ -86,8 +86,8 @@ function elseChainIsSatisfied(node) {
 }
 
 function getBindingConditional(node, bindings) {
-    var key, conditionalBinding;
-    for (i = conditionalHandlerKeys.length - 1; i >= 0; --i) {
+    var key, conditionalBinding, handlerFn;
+    for (var i = conditionalHandlerKeys.length - 1; i >= 0; --i) {
         key = conditionalHandlerKeys[i];
         conditionalBinding = bindings[key];
         
@@ -245,7 +245,7 @@ function replaceBinding(handlerName) {
                     savedHandlerName + ": __elseWrapperValueAccessor__()"),
                 closeComment = document.createComment("/ko"),
                 node = ve.firstChild(element),
-                lastNode = null;
+                lastNode = null, match;
 
             if (node) do {
                 if (node.nodeType === 8) {
